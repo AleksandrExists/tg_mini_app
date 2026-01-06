@@ -5,16 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Working title</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script type="module" src="app.js"></script>
 </head>
 <body>
     <div class="container">
         <!-- Шапка -->
         <div class="header">
-            <button class="back-button" id="backBtn">← Назад</button>
             <h1>Working title</h1>
-            <div style="width: 60px;"></div> <!-- Пустой элемент для баланса -->
         </div>
 
         <!-- Дни недели -->
@@ -26,28 +23,10 @@
         <div class="content">
             <!-- Секция -->
             <div id="habitsSection">
-                <div id="habitsContainer" class="loading">
+                <div class="loading" id="habitsContainer">
                     Загрузка...
                 </div>
             </div>
-
-            <!-- Секция отчетов -->
-            <div id="reportsSection" class="hidden">
-                <div class="reports-header">
-                    <h2 class="reports-title">📊 Отчеты</h2>
-                </div>
-                
-                <div class="period-selector">
-                    <button class="period-btn active" data-period="week">Неделя</button>
-                    <button class="period-btn" data-period="month">Месяц</button>
-                    <button class="period-btn" data-period="year">Год</button>
-                </div>
-                
-                <div id="reportsContainer">
-                    <!-- Отчеты будут загружены здесь -->
-                </div>
-            </div>
-        </div>
 
         <!-- Нижняя панель -->
         <div class="bottom-nav">
@@ -57,50 +36,6 @@
             <button class="nav-button add" id="addHabitBtn">
                 ➕ Добавить
             </button>
-            <div style="width: 60px;"></div> <!-- Пустой элемент для баланса -->
-        </div>
-    </div>
-
-    <!-- Модальное окно добавления -->
-    <div class="modal" id="addHabitModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="modal-title">Новая</h2>
-                <button class="close-modal" id="closeModal">&times;</button>
-            </div>
-            
-            <form id="addHabitForm">
-                <div class="form-group">
-                    <label for="habitName">Название *</label>
-                    <input type="text" id="habitName" placeholder="Например..." required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="habitDescription">Описание (необязательно)</label>
-                    <textarea id="habitDescription" placeholder="Описание..."></textarea>
-                </div>
-                
-                <div class="form-group date-range">
-                    <div style="flex: 1;">
-                        <label for="habitBeginDate">Начало</label>
-                        <input type="date" id="habitBeginDate" required>
-                    </div>
-                    
-                    <div style="flex: 1;">
-                        <label for="habitEndDate">Окончание</label>
-                        <input type="date" id="habitEndDate" required>
-                    </div>
-                </div>
-                
-                <div class="form-actions">
-                    <button type="button" class="btn secondary" onclick="app.hideAddHabitModal()">
-                        Отмена
-                    </button>
-                    <button type="submit" class="btn primary">
-                        Сохранить
-                    </button>
-                </div>
-            </form>
         </div>
     </div>
 </body>
