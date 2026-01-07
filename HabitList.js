@@ -1,13 +1,17 @@
 import { supabase } from './supabase.js';
+import { log } from './Logger.js';
 
 export class HabitList {
     constructor(date) {
+        log.debug('start');
         this.date = date;
         this.habits = [];
+        log.debug('finish');
     }
 
     // Метод загрузки привычек
     async load() {
+        log.debug('start');
         try {
             const formattedDate = this.date.toISOString().split('T')[0];
             
@@ -21,16 +25,18 @@ export class HabitList {
             if (error) throw error;
             
             this.habits = data || [];
-            console.log('Загружено привычек:', this.habits.length);
+            log.info('Загружено:', this.habits.length);
             
         } catch (error) {
-            console.error('Ошибка загрузки привычек:', error);
+            log.error('Ошибка загрузки')
             this.habits = [];
         }
+        log.debug('finish');
     }
 
     // Метод рендеринга
     render() {
+        log.debug('start');
         const container = document.getElementById('habitsContainer');
         
         if (this.habits.length === 0) {
@@ -53,11 +59,14 @@ export class HabitList {
         });
         
         container.innerHTML = html;
+        log.debug('finish');
     }
 
     async updateDate(date) {
+        log.debug('start');
         this.date = date;
         await this.load();    // Перезагружаем привычки для новой даты
         this.render();        // Перерисовываем список
+        log.debug('finish');
     }
 }

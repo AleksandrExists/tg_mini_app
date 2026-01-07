@@ -1,8 +1,10 @@
+import { log } from './Logger.js'
 import { DaysPanel } from './DaysPanel.js';
 import { HabitList } from './HabitList.js';
 
-class HabitTracker {
+class Main {
     constructor() {
+        log.debug('start');
         this.selectedDate = new Date();
         
         // Создаем компоненты
@@ -11,28 +13,35 @@ class HabitTracker {
             this.onDateSelect.bind(this)
         );
         this.habitList = new HabitList(this.selectedDate);
+        log.debug('finish');
     }
 
     async init() {
+        log.debug('start');
         // Рендерим панель дней
         this.daysPanel.render();
         
         // Загружаем и рендерим привычки
         await this.habitList.load();
         this.habitList.render();
+        log.debug('finish');
     }
 
     async onDateSelect(date) {
+        log.debug('start');
         this.selectedDate = date;
         
         // Обновляем привычки для выбранной даты
         await this.habitList.updateDate(date);
+        log.debug('finish');
     }
 }
 
 // Инициализация приложения
 document.addEventListener('DOMContentLoaded', () => {
-    const app = new HabitTracker();
+    log.debug('start');
+    const app = new Main();
     app.init();
-    window.app = app; // Для доступа из консоли
+    // window.app = app; // Для доступа из консоли
+    log.debug('finish');
 });

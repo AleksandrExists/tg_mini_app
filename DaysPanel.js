@@ -1,17 +1,22 @@
+import { log } from './Logger.js'
+
 export class DaysPanel {
     constructor(selectedDate, onDateSelect) {
+        log.debug('start');
         this.selectedDate = selectedDate;
         this.onDateSelect = onDateSelect;
     }
 
     // Метод для получения названия дня
     getDayName(dayIndex) {
+        log.debug('start');
         const days = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
         return days[dayIndex];
     }
 
     // Метод рендеринга
     render() {
+        log.debug('start');
         const container = document.getElementById('daysContainer');
         
         // Создаем 7 дней (от -6 до текущего)
@@ -39,6 +44,7 @@ export class DaysPanel {
     }
 
     addEventListeners() {
+        log.debug('start');
         // Вешаем один обработчик на контейнер
         const container = document.getElementById('daysContainer');
         
@@ -56,6 +62,7 @@ export class DaysPanel {
     }
 
     updateActiveButton(clickedButton) {
+        log.debug('start');
         // Снимаем активный класс со всех кнопок
         document.querySelectorAll('.day-button').forEach(btn => {
             btn.classList.remove('active');
