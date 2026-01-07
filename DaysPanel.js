@@ -18,12 +18,17 @@ export class DaysPanel {
     render() {
         log.debug('start');
         const container = document.getElementById('daysContainer');
-        
-        // Создаем 7 дней (от -6 до текущего)
+
+        // Получаем начало текущего дня (00:00:00)
+        const today = new Date();
+        const todayStart = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+        const todayTimestamp = todayStart.getTime();
+        const dayInMs = 24 * 60 * 60 * 1000;
+
+        // Создаем HTML для 7 дней
         let html = '';
         for (let i = -6; i <= 0; i++) {
-            const date = new Date();
-            date.setDate(date.getDate() + i);
+            const date = new Date(todayTimestamp + (i * dayInMs));
             
             const dayName = this.getDayName(date.getDay());
             const dayNumber = date.getDate();
@@ -41,6 +46,7 @@ export class DaysPanel {
         
         container.innerHTML = html;
         this.addEventListeners();
+        log.debug('finish');
     }
 
     addEventListeners() {
