@@ -39,19 +39,19 @@ export class DaysPanel {
     }
 
     addEventListeners() {
-        document.querySelectorAll('.day-button').forEach(button => {
-            button.addEventListener('click', (event) => {
-                const dateString = event.currentTarget.dataset.date;
-                const selectedDate = new Date(dateString);
-                
-                // Обновляем активную кнопку
-                this.updateActiveButton(event.currentTarget);
-                
-                // Вызываем колбэк с выбранной датой
-                if (this.onDateSelect) {
-                    this.onDateSelect(selectedDate);
-                }
-            });
+        // Вешаем один обработчик на контейнер
+        const container = document.getElementById('daysContainer');
+        
+        container.addEventListener('click', (event) => {
+            // Проверяем, что кликнули именно по кнопке дня
+            const button = event.target.closest('.day-button');
+            if (!button) return; // Если кликнули не по кнопке - выходим
+            
+            const dateString = button.dataset.date;
+            const selectedDate = new Date(dateString);
+            
+            this.updateActiveButton(button);
+            this.onDateSelect(selectedDate);
         });
     }
 
