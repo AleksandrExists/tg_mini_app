@@ -6,7 +6,10 @@ class HabitTracker {
         this.selectedDate = new Date();
         
         // Создаем компоненты
-        this.daysPanel = new DaysPanel(this.selectedDate);
+        this.daysPanel = new DaysPanel(
+            this.selectedDate,
+            this.onDateSelect.bind(this)
+        );
         this.habitList = new HabitList(this.selectedDate);
     }
 
@@ -17,6 +20,13 @@ class HabitTracker {
         // Загружаем и рендерим привычки
         await this.habitList.load();
         this.habitList.render();
+    }
+
+    async onDateSelect(date) {
+        this.selectedDate = date;
+        
+        // Обновляем привычки для выбранной даты
+        await this.habitList.updateDate(date);
     }
 }
 

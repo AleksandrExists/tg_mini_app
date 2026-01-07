@@ -54,4 +54,10 @@ export class HabitList {
         
         container.innerHTML = html;
     }
+
+    async updateDate(date) {
+        this.date = date;
+        await this.load();    // Перезагружаем привычки для новой даты
+        this.render();        // Перерисовываем список
+    }
 }
