@@ -53,6 +53,9 @@ export class HabitList {
             html += `
                 <div class="habit-item">
                     <div class="habit-name">${habit.name}</div>
+                    <input type="number" 
+                           class="habit-value" 
+                           value="${habit.value}">
                 </div>
             `;
         });
