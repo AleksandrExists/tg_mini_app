@@ -1,6 +1,7 @@
 import { log } from './Logger.js'
 
 export class DaysPanel {
+    static DAY_NAMES = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
     constructor(selectedDate, onDateSelect) {
         log.debug('start');
         this.selectedDate = selectedDate;
@@ -9,9 +10,7 @@ export class DaysPanel {
 
     // Метод для получения названия дня
     getDayName(dayIndex) {
-        log.debug('start');
-        const days = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
-        return days[dayIndex];
+        return DaysPanel.DAY_NAMES[dayIndex];
     }
 
     // Метод рендеринга
