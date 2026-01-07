@@ -3,9 +3,10 @@ import { log } from './Logger.js'
 export class DaysPanel {
     static DAY_NAMES = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
     constructor(selectedDate, onDateSelect) {
-        log.debug('start');
+        log.in();
         this.selectedDate = selectedDate;
         this.onDateSelect = onDateSelect;
+        log.out();
     }
 
     // Метод для получения названия дня
@@ -15,7 +16,7 @@ export class DaysPanel {
 
     // Метод рендеринга
     render() {
-        log.debug('start');
+        log.in();
         const container = document.getElementById('daysContainer');
 
         // Получаем начало текущего дня (00:00:00)
@@ -32,8 +33,12 @@ export class DaysPanel {
             const dayName = this.getDayName(date.getDay());
             const dayNumber = date.getDate();
             const isToday = i === 0;
-            const dateString = date.toISOString().split('T')[0];
-            
+            // Форматирование даты
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            const dateString = `${year}-${month}-${day}`;
+
             html += `
                 <button class="day-button ${isToday ? 'active' : ''}" 
                         data-date="${dateString}">
@@ -45,11 +50,11 @@ export class DaysPanel {
         
         container.innerHTML = html;
         this.addEventListeners();
-        log.debug('finish');
+        log.out();
     }
 
     addEventListeners() {
-        log.debug('start');
+        log.in();
         // Вешаем один обработчик на контейнер
         const container = document.getElementById('daysContainer');
         
@@ -60,14 +65,15 @@ export class DaysPanel {
             
             const dateString = button.dataset.date;
             const selectedDate = new Date(dateString);
-            
+
             this.updateActiveButton(button);
             this.onDateSelect(selectedDate);
         });
+        log.out();
     }
 
     updateActiveButton(clickedButton) {
-        log.debug('start');
+        log.in();
         // Снимаем активный класс со всех кнопок
         document.querySelectorAll('.day-button').forEach(btn => {
             btn.classList.remove('active');
@@ -75,5 +81,6 @@ export class DaysPanel {
         
         // Добавляем активный класс нажатой кнопке
         clickedButton.classList.add('active');
+        log.out();
     }
 }

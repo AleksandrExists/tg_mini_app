@@ -3,15 +3,15 @@ import { log } from './Logger.js';
 
 export class HabitList {
     constructor(date) {
-        log.debug('start');
+        log.in();
         this.date = date;
         this.habits = [];
-        log.debug('finish');
+        log.out();
     }
 
     // Метод загрузки привычек
     async load() {
-        log.debug('start');
+        log.in();
         try {
             const formattedDate = this.date.toISOString().split('T')[0];
             
@@ -30,12 +30,12 @@ export class HabitList {
             log.error('Ошибка загрузки')
             this.habits = [];
         }
-        log.debug('finish');
+        log.out();
     }
 
     // Метод рендеринга
     render() {
-        log.debug('start');
+        log.in();
         const container = document.getElementById('habitsContainer');
         
         if (this.habits.length === 0) {
@@ -61,14 +61,14 @@ export class HabitList {
         });
         
         container.innerHTML = html;
-        log.debug('finish');
+        log.out();
     }
 
     async updateDate(date) {
-        log.debug('start');
+        log.in();
         this.date = date;
         await this.load();    // Перезагружаем привычки для новой даты
         this.render();        // Перерисовываем список
-        log.debug('finish');
+        log.out();
     }
 }

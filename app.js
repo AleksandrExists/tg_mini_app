@@ -4,7 +4,7 @@ import { HabitList } from './HabitList.js';
 
 class Main {
     constructor() {
-        log.debug('start');
+        log.in();
         this.selectedDate = new Date();
         
         // Создаем компоненты
@@ -13,35 +13,35 @@ class Main {
             this.onDateSelect.bind(this)
         );
         this.habitList = new HabitList(this.selectedDate);
-        log.debug('finish');
+        log.out();
     }
 
     async init() {
-        log.debug('start');
+        log.in();
         // Рендерим панель дней
         this.daysPanel.render();
         
         // Загружаем и рендерим привычки
         await this.habitList.load();
         this.habitList.render();
-        log.debug('finish');
+        log.out();
     }
 
     async onDateSelect(date) {
-        log.debug('start');
+        log.in();
         this.selectedDate = date;
         
         // Обновляем привычки для выбранной даты
         await this.habitList.updateDate(date);
-        log.debug('finish');
+        log.out();
     }
 }
 
 // Инициализация приложения
 document.addEventListener('DOMContentLoaded', () => {
-    log.debug('start');
+    log.in();
     const app = new Main();
     app.init();
     // window.app = app; // Для доступа из консоли
-    log.debug('finish');
+    log.out();
 });
