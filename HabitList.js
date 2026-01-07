@@ -17,10 +17,9 @@ export class HabitList {
             
             // Загружаем привычки для выбранной даты
             const { data, error } = await supabase
-                .from('task')
+                .from('days')
                 .select('*')
-                .lte('begin_date', formattedDate)
-                .gte('end_date', formattedDate);
+                .eq('date', formattedDate);
 
             if (error) throw error;
             

@@ -36,7 +36,7 @@ const emojis = {
     info: 'ℹ️',
     warn: '⚠️', 
     error: '❌',
-    debug: '🐛'
+    debug: '🔍'
 };
 
 export const log = {
