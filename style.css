@@ -51,3 +51,20 @@ body {
     background-color: #007aff;
     color: white;
 }
+
+.content {
+    background: white;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 80px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    min-height: 300px;
+}
+
+.habit-item {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.2s;
+}
