@@ -2,10 +2,9 @@ import { log } from './Logger.js'
 
 export class DaysPanel {
     static DAY_NAMES = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
-    constructor(selectedDate, onDateSelect) {
+    constructor(selectedDate) {
         log.in();
         this.selectedDate = selectedDate;
-        this.onDateSelect = onDateSelect;
         log.out();
     }
 
@@ -49,29 +48,29 @@ export class DaysPanel {
         }
         
         container.innerHTML = html;
-        this.addEventListeners();
         log.out();
     }
 
-    addEventListeners() {
-        log.in();
-        // Вешаем один обработчик на контейнер
-        const container = document.getElementById('daysContainer');
+    // addEventListeners() {
+    //     log.in();
+    //     // Вешаем один обработчик на контейнер
+    //     const container = document.getElementById('daysContainer');
         
-        container.addEventListener('click', (event) => {
-            // Проверяем, что кликнули именно по кнопке дня
-            const button = event.target.closest('.day-button');
-            if (!button) return; // Если кликнули не по кнопке - выходим
+    //     container.addEventListener('click', (event) => {
+    //         // Проверяем, что кликнули именно по кнопке дня
+    //         const button = event.target.closest('.day-button');
+    //         if (!button) return; // Если кликнули не по кнопке - выходим
             
-            const dateString = button.dataset.date;
-            const selectedDate = new Date(dateString);
+    //         const dateString = button.dataset.date;
+    //         const selectedDate = new Date(dateString);
 
-            this.updateActiveButton(button);
-            this.onDateSelect(selectedDate);
-        });
-        log.out();
-    }
+    //         this.updateActiveButton(button);
+    //         this.onDateSelect(selectedDate);
+    //     });
+    //     log.out();
+    // }
 
+    // Метод обновления активной кнопки
     updateActiveButton(clickedButton) {
         log.in();
         // Снимаем активный класс со всех кнопок
@@ -82,5 +81,10 @@ export class DaysPanel {
         // Добавляем активный класс нажатой кнопке
         clickedButton.classList.add('active');
         log.out();
+    }
+
+    // Методя для получения всех кнопок дней
+    getDayButtons() {
+        return document.querySelectorAll('.day_button');
     }
 }

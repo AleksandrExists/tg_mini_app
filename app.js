@@ -8,10 +8,7 @@ class Main {
         this.selectedDate = new Date();
         
         // Создаем компоненты
-        this.daysPanel = new DaysPanel(
-            this.selectedDate,
-            this.onDateSelect.bind(this)
-        );
+        this.daysPanel = new DaysPanel(this.selectedDate);
         this.habitList = new HabitList(this.selectedDate);
         log.out();
     }
@@ -21,9 +18,39 @@ class Main {
         // Рендерим панель дней
         this.daysPanel.render();
         
+        // Настраиваем обработчики событий
+        this.setupEventListeners();
+        
         // Загружаем и рендерим привычки
         await this.habitList.load();
         this.habitList.render();
+        log.out();
+    }
+
+    // Настройка всех обработчиков событий
+    setupEventListeners() {
+        log.in();
+        const daysContainer = document.getElementById('daysContainer');
+        
+        // Один обработчик на всю панель дней
+        daysContainer.addEventListener('click', this.handleDayClick.bind(this));
+        log.out();
+    }
+
+    // Обработчик кликов по дням
+    handleDayClick(event) {
+        log.in();
+        const button = event.target.closest('.day-button');
+        if (!button) return; // Клик не по кнопке дня
+        
+        const dateString = button.dataset.date;
+        const selectedDate = new Date(dateString);
+        
+        // Обновляем UI
+        this.daysPanel.updateActiveButton(button);
+        
+        // Выполняем бизнес-логику
+        this.onDateSelect(selectedDate);
         log.out();
     }
 
