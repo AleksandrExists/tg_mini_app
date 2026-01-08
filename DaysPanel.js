@@ -51,25 +51,6 @@ export class DaysPanel {
         log.out();
     }
 
-    // addEventListeners() {
-    //     log.in();
-    //     // Вешаем один обработчик на контейнер
-    //     const container = document.getElementById('daysContainer');
-        
-    //     container.addEventListener('click', (event) => {
-    //         // Проверяем, что кликнули именно по кнопке дня
-    //         const button = event.target.closest('.day-button');
-    //         if (!button) return; // Если кликнули не по кнопке - выходим
-            
-    //         const dateString = button.dataset.date;
-    //         const selectedDate = new Date(dateString);
-
-    //         this.updateActiveButton(button);
-    //         this.onDateSelect(selectedDate);
-    //     });
-    //     log.out();
-    // }
-
     // Метод обновления активной кнопки
     updateActiveButton(clickedButton) {
         log.in();
@@ -83,8 +64,8 @@ export class DaysPanel {
         log.out();
     }
 
-    // Методя для получения всех кнопок дней
+    // Метод для получения всех кнопок дней
     getDayButtons() {
-        return document.querySelectorAll('.day_button');
+        return document.querySelectorAll('.day-button');
     }
 }
