@@ -1,6 +1,5 @@
 // Development конфигурация Supabase
-// TODO: Замените на ключи от dev проекта Supabase
 export const SUPABASE_CONFIG = {
-    URL: 'https://your-dev-project.supabase.co',
-    ANON_KEY: 'your-dev-anon-key'
+    URL: 'https://rbzpdqkysbfbykanyund.supabase.co',
+    ANON_KEY: 'sb_publishable_8ge2qcs6M3m6e016Ec6hyw_m7iQd8Wr'
 };

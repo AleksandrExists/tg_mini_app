@@ -7,7 +7,7 @@ DROP TABLE IF EXISTS _dict_type CASCADE;
 -- Справочник типов задач
 CREATE TABLE _dict_type (
     id SERIAL PRIMARY KEY,
-    name VARCHAR(100) NOT NULL UNIQUE,
+    name VARCHAR(100) NOT NULL UNIQUE
 );
 
 -- Таблица задач/привычек
