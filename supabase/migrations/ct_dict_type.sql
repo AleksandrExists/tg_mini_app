@@ -1,0 +1,5 @@
+DROP TABLE IF EXISTS _dict_type CASCADE;
+CREATE TABLE _dict_type (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(64) NOT NULL UNIQUE
+);

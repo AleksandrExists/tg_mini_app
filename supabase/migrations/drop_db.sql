@@ -1,0 +1,2 @@
+--DROP TABLE IF EXISTS test_users CASCADE;
+--DROP TABLE IF EXISTS test_activity CASCADE;

@@ -1,0 +1,5 @@
+INSERT INTO task
+(name, weight, add_to_sum, start_value, target_value, type_id)
+VALUES
+    ('add', 0.3, TRUE, 50, 250, 1),
+    ('replace', 0.7, FALSE, 400, 700, 1);
