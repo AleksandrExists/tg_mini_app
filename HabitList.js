@@ -6,6 +6,7 @@ export class HabitList {
         log.in();
         this.date = date;
         this.habits = [];
+        this.debouncedSave = this.debounce(this.saveHabit.bind(this), 500);
         log.out();
     }
 
@@ -37,7 +38,7 @@ export class HabitList {
     render() {
         log.in();
         const container = document.getElementById('habitsContainer');
-        
+
         if (this.habits.length === 0) {
             container.innerHTML = `
                 <div class="empty-state">
@@ -53,14 +54,18 @@ export class HabitList {
             html += `
                 <div class="habit-item">
                     <div class="habit-name">${habit.name}</div>
-                    <input type="number" 
-                           class="habit-value" 
+                    <input type="number"
+                           class="habit-value"
+                           data-id="${habit.id}"
                            value="${habit.value}">
                 </div>
             `;
         });
-        
+
         container.innerHTML = html;
+
+        // Добавляем обработчики событий после рендеринга
+        this.setupEventListeners();
         log.out();
     }
 
@@ -70,5 +75,49 @@ export class HabitList {
         await this.load();    // Перезагружаем привычки для новой даты
         this.render();        // Перерисовываем список
         log.out();
+    }
+
+    // Метод сохранения значения привычки
+    async saveHabit(id, value) {
+        log.in();
+        try {
+            const { error } = await supabase
+                .from('data')
+                .update({ value: parseInt(value) || 0 })
+                .eq('id', id);
+
+            if (error) throw error;
+            log.info('Сохранено:', id, value);
+        } catch (error) {
+            log.error('Ошибка сохранения:', error);
+        }
+        log.out();
+    }
+
+    // Настройка обработчиков событий
+    setupEventListeners() {
+        log.in();
+        const inputs = document.querySelectorAll('.habit-value');
+        inputs.forEach(input => {
+            input.addEventListener('input', (e) => {
+                const id = e.target.dataset.id;
+                const value = e.target.value;
+                this.debouncedSave(id, value);
+            });
+        });
+        log.out();
+    }
+
+    // Debounce helper
+    debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
     }
 }
